@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)file:///C:/Users/Lorena/Lista%20Tareas2.html -->
+<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tareas Semanales</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a3b5d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: #fff;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .card {
+            background: #222b3c;
+            padding: 15px;
+            width: 30%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .card h2 {
+            text-align: center;
+            font-size: 1.2em;
+            color: #e0e0e0;
+            margin-bottom: 10px;
+        }
+
+        .task-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .task-item {
+            background: #2f3e56;
+            color: #e0e0e0;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .task-item button {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .task-form {
+            display: flex;
+            margin-bottom: 10px;
+        }
+
+        .task-form input {
+            flex: 1;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .task-form button {
+            padding: 10px;
+            font-size: 14px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h2>Tareas Pendientes</h2>
+            <div class="task-form">
+                <input type="text" id="taskInput1" placeholder="Agregar tarea...">
+                <button onclick="addTask(&#39;taskList1&#39;, &#39;taskInput1&#39;)">Agregar</button>
+            </div>
+            <ul class="task-list" id="taskList1"><li class="task-item">
+                <span>Hola, muchachos! 👋  A través de este medio pueden ver las evaluaciones correspondientes para esta semana:  Cálculo: Examen 📚 Educación Física: Ensayo escrito 📝 Programación: Nada, creo 😅 Antropología Filosófica: Supernota 📖 Arquitectura (ARC): Pendiente de confirmar 🏛️</span>
+                <button onclick="removeTask(this)">Eliminar</button>
+            </li></ul>
+        </div>
+
+        <div class="card">
+            <h2>Martes</h2>
+            <div class="task-form">
+                <input type="text" id="taskInput2" placeholder="Agregar tarea...">
+                <button onclick="addTask(&#39;taskList2&#39;, &#39;taskInput2&#39;)">Agregar</button>
+            </div>
+            <ul class="task-list" id="taskList2"><li class="task-item">
+                <span>ALP-265</span>
+                <button onclick="removeTask(this)">Eliminar</button>
+            </li><li class="task-item">
+                <span>📖ING-243 Tema y taller "Listo"</span>
+                <button onclick="removeTask(this)">Eliminar</button>
+            </li><li class="task-item">
+                <span>CAL-265 📚</span>
+                <button onclick="removeTask(this)">Eliminar</button>
+            </li><li class="task-item">
+                <span>📖 Arquitectura del computador: Taller practico en parejas "Listo" (ARC):</span>
+                <button onclick="removeTask(this)">Eliminar</button>
+            </li></ul>
+        </div>
+
+        <div class="card">
+            <h2>Viernes</h2>
+            <div class="task-form">
+                <input type="text" id="taskInput3" placeholder="Agregar tarea...">
+                <button onclick="addTask(&#39;taskList3&#39;, &#39;taskInput3&#39;)">Agregar</button>
+            </div>
+            <ul class="task-list" id="taskList3"><li class="task-item">
+                <span>Cálculo: Examen 📚</span>
+                <button onclick="removeTask(this)">Eliminar</button>
+            </li><li class="task-item">
+                <span>Educación Física: Ensayo escrito 📝</span>
+                <button onclick="removeTask(this)">Eliminar</button>
+            </li><li class="task-item">
+                <span>Algoritmo y Programación I: Nada, creo 😅</span>
+                <button onclick="removeTask(this)">Eliminar</button>
+            </li><li class="task-item">
+                <span>Antropología Filosófica: Supernota 📖</span>
+                <button onclick="removeTask(this)">Eliminar</button>
+            </li><li class="task-item">
+                <span>📖 Arquitectura y estructura del computador(ARC): 🏛️</span>
+                <button onclick="removeTask(this)">Eliminar</button>
+            </li></ul>
+        </div>
+    </div>
+
+    <script>
+        // Función para agregar una nueva tarea en una lista específica
+        function addTask(listId, inputId) {
+            const taskInput = document.getElementById(inputId);
+            const taskText = taskInput.value.trim();
+
+            if (taskText === '') return;
+
+            const taskList = document.getElementById(listId);
+            const listItem = document.createElement('li');
+            listItem.className = 'task-item';
+            listItem.innerHTML = `
+                <span>${taskText}</span>
+                <button onclick="removeTask(this)">Eliminar</button>
+            `;
+            taskList.appendChild(listItem);
+
+            taskInput.value = '';
+        }
+
+        // Función para eliminar una tarea
+        function removeTask(button) {
+            const taskItem = button.parentElement;
+            taskItem.remove();
+        }
+    </script>
+
+
+</body></html>
